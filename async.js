@@ -1,4 +1,4 @@
-// Callbacks
+/* // Callbacks
 
 // array of blog posts
 const posts = [
@@ -51,4 +51,63 @@ createPost(
 );
 
 
-// Now it waits all seconds and displays all posts
+// Now it waits all seconds and displays all posts */
+
+
+// Promises
+
+const posts = [
+    { title: 'Post One', body: 'This is post one' },
+    { title: 'Post Two', body: 'This is post two' },
+];
+
+function getPosts(){
+
+    setTimeout(() => {
+
+        let output = '';
+        posts.forEach((post, index) => {
+            output += `<li>${post.title}</li>`;
+        });
+
+        document.body.innerHTML = output;
+    }, 1000); 
+
+}
+
+
+function createPost(post){
+
+    // instead of passing callback return a promise
+    // promise calls resolve to resolve a promise successfully
+    // promise calls reject when there is an error
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+
+            posts.push(post);
+
+            // error checking 
+            const error = false;
+
+            if(!error) {
+
+                // if no errors
+                resolve();
+
+            } else {
+
+                // if errors exist
+                reject('Error: Something went wrong!');
+
+            }
+
+        }, 2000);
+    })
+   
+}
+
+
+createPost({ title: 'Post Three', body: 'This is post three' }).then(getPosts);
+
+// no need to pass getPost()
