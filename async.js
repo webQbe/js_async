@@ -28,23 +28,27 @@ function getPosts(){
 
 
 // Create new posts
-
-function createPost(post){
+function createPost(post, callback){
 
     setTimeout(() => {
 
         // insert new post to posts array
         posts.push(post);
 
+        // add callback 
+        // to call a function right after new post is pushed
+        callback();
+
     }, 2000);// wait 2 seconds
 
 }
 
-// display posts
-getPosts();
+// Create a post
+// Call getPosts() as callback function
+createPost(
+    { title: 'Post Three', body: 'This is post three' }, 
+    getPosts
+);
 
-// create a post
-createPost({ title: 'Post Three', body: 'This is post three' });
 
-// Post Three not displayed 
-// because createPost() took 2 secs and getPosts() waits 1 sec
+// Now it waits all seconds and displays all posts
