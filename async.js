@@ -109,5 +109,3 @@ function createPost(post){
 
 
 createPost({ title: 'Post Three', body: 'This is post three' }).then(getPosts);
-
-// no need to pass getPost()
