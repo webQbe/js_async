@@ -26,4 +26,25 @@ function getPosts(){
 
 }
 
+
+// Create new posts
+
+function createPost(post){
+
+    setTimeout(() => {
+
+        // insert new post to posts array
+        posts.push(post);
+
+    }, 2000);// wait 2 seconds
+
+}
+
+// display posts
 getPosts();
+
+// create a post
+createPost({ title: 'Post Three', body: 'This is post three' });
+
+// Post Three not displayed 
+// because createPost() took 2 secs and getPosts() waits 1 sec
