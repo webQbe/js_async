@@ -88,7 +88,7 @@ function createPost(post){
             posts.push(post);
 
             // error checking 
-            const error = false;
+            const error = true;
 
             if(!error) {
 
@@ -108,4 +108,6 @@ function createPost(post){
 }
 
 
-createPost({ title: 'Post Three', body: 'This is post three' }).then(getPosts);
+createPost({ title: 'Post Three', body: 'This is post three' })
+.then(getPosts)
+.catch(err => console.log(err));
