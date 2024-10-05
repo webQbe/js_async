@@ -53,8 +53,7 @@ createPost(
 
 // Now it waits all seconds and displays all posts */
 
-
-// Promises
+/* // Promises
 
 const posts = [
     { title: 'Post One', body: 'This is post one' },
@@ -110,12 +109,9 @@ function createPost(post){
 
 createPost({ title: 'Post Three', body: 'This is post three' })
 .then(getPosts) // similar to callback function
-.catch(err => console.log(err)); // error handling
+.catch(err => console.log(err)); // error handling */
 
-
-
-
-// Promise.all
+/* // Promise.all
 
 const promise1 = Promise.resolve('Hello World!'); // without reject
 const promise2 = 10; // variable
@@ -125,5 +121,72 @@ const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Goo
 // then call function
 const promise4 = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
 
-// Use Promise.all to return values of each variable 
-Promise.all([promise1, promise2, promise3, promise4]).then(values => console.log(values));
+// Take all variables
+// then display values from each variable
+Promise.all([promise1, promise2, promise3, promise4]).then(values => console.log(values)); */
+
+
+// Async / Await
+
+const posts = [
+    { title: 'Post One', body: 'This is post one' },
+    { title: 'Post Two', body: 'This is post two' },
+];
+
+function getPosts(){
+    setTimeout(() => {
+        let output = '';
+        posts.forEach((post, index) => {
+            output += `<li>${post.title}</li>`;
+        });
+        document.body.innerHTML = output;
+    }, 1000); 
+
+}
+
+function createPost(post){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            posts.push(post);
+            const error = false;
+            if(!error) {
+                resolve();
+            } else {
+                reject('Error: Something went wrong!');
+            }
+        }, 2000);
+    })
+   
+}
+
+
+async function init(){
+
+    // wait for asynchronous process to complete
+    await createPost({ title: 'Post Three', body: 'This is post three' });
+    getPosts();
+
+}
+
+// call function
+init();
+
+
+// Async / Await with fetch()
+async function fetchUsers(){
+
+    // wait for fetch() to complete
+    const res = await fetch('https://jsonplaceholder.typicode.com/users');
+
+    // wait for json() to complete
+    const data = await res.json();
+
+    // log data
+    console.log(data);
+
+}
+
+// call function
+fetchUsers();
+
+// .then() or .catch() not used with  Async / Await 
