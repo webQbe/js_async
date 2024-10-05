@@ -88,7 +88,7 @@ function createPost(post){
             posts.push(post);
 
             // error checking 
-            const error = true;
+            const error = false;
 
             if(!error) {
 
@@ -109,5 +109,21 @@ function createPost(post){
 
 
 createPost({ title: 'Post Three', body: 'This is post three' })
-.then(getPosts)
-.catch(err => console.log(err));
+.then(getPosts) // similar to callback function
+.catch(err => console.log(err)); // error handling
+
+
+
+
+// Promise.all
+
+const promise1 = Promise.resolve('Hello World!'); // without reject
+const promise2 = 10; // variable
+const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Goodbye!'));
+
+// fetch data
+// then call function
+const promise4 = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json());
+
+// Use Promise.all to return values of each variable 
+Promise.all([promise1, promise2, promise3, promise4]).then(values => console.log(values));
